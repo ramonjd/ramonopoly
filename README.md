@@ -19,7 +19,7 @@ npm run preview   # builds, then serves dist/ locally
 ```
 content/posts/     Blog posts, one Markdown file each
 src/templates/     HTML templates: layout, home page, blog index, post
-src/assets/        styles.css and main.js, copied as they are
+src/assets/        styles.css, main.js, avatar-game.js (the hero's game) and sprites.js (its pixel art), copied as they are
 scripts/build.js   The build
 ```
 

@@ -13,6 +13,7 @@
 import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { marked } from 'marked';
+import { drawSprite, FRAMES, ICONS } from '../src/assets/sprites.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const TEMPLATES_DIR = path.join(ROOT, 'src', 'templates');
@@ -35,6 +36,11 @@ async function build() {
 		title: SITE_NAME,
 		content: render(await loadTemplate('home'), {
 			latestPosts: renderPostList(posts.slice(0, POSTS_ON_HOME_PAGE)),
+			avatar: drawSprite(FRAMES.front),
+			iconBook: drawSprite(ICONS.book),
+			iconGuitar: drawSprite(ICONS.guitar),
+			iconScales: drawSprite(ICONS.scales),
+			iconPalette: drawSprite(ICONS.palette),
 		}),
 	});
 

@@ -14,49 +14,73 @@
 		</p>
 	</div>
 
-	<div class="avatar-stage pixel-border">
-		<!-- A 16×20 pixel sprite. The pupils move one pixel towards the mouse (see main.js). -->
-		<svg class="avatar" width="128" height="160" viewBox="0 0 16 20" shape-rendering="crispEdges" role="img" aria-label="Pixel-art Ramon in a baseball cap">
-			<!-- Cap -->
-			<rect x="5" y="0" width="6" height="1" fill="#FFB547" />
-			<rect x="4" y="1" width="8" height="2" fill="#FFB547" />
-			<rect x="7" y="1" width="2" height="1" fill="#FFFFFF" />
-			<rect x="2" y="3" width="12" height="1" fill="#B8721E" />
-
-			<!-- Face -->
-			<rect x="3" y="4" width="1" height="1" fill="var(--hair)" />
-			<rect x="4" y="4" width="8" height="1" fill="#E8B48A" />
-			<rect x="12" y="4" width="1" height="1" fill="var(--hair)" />
-			<rect x="3" y="5" width="1" height="3" fill="#E8B48A" />
-			<rect x="7" y="5" width="2" height="3" fill="#E8B48A" />
-			<rect x="12" y="5" width="1" height="3" fill="#E8B48A" />
-			<rect x="3" y="8" width="10" height="2" fill="#E8B48A" />
-			<rect x="3" y="10" width="3" height="1" fill="#E8B48A" />
-			<rect x="6" y="10" width="4" height="1" fill="#B5524A" />
-			<rect x="10" y="10" width="3" height="1" fill="#E8B48A" />
-			<rect x="4" y="11" width="8" height="1" fill="#E8B48A" />
-			<rect x="6" y="12" width="4" height="1" fill="#E8B48A" />
-
-			<!-- Eyes: 3×3 whites, each with a 1×1 pupil that starts in the centre -->
-			<rect x="4" y="5" width="3" height="3" fill="#FFFFFF" />
-			<rect x="9" y="5" width="3" height="3" fill="#FFFFFF" />
-			<rect class="pupil" x="5" y="6" width="1" height="1" fill="#1A1A1A" />
-			<rect class="pupil" x="10" y="6" width="1" height="1" fill="#1A1A1A" />
-
-			<!-- Shirt and arms -->
-			<rect x="3" y="13" width="10" height="1" fill="var(--accent)" />
-			<rect x="2" y="14" width="12" height="1" fill="var(--accent)" />
-			<rect x="2" y="15" width="1" height="1" fill="#E8B48A" />
-			<rect x="3" y="15" width="10" height="1" fill="var(--accent)" />
-			<rect x="13" y="15" width="1" height="1" fill="#E8B48A" />
-			<rect x="3" y="16" width="10" height="1" fill="var(--accent)" />
-
-			<!-- Legs -->
-			<rect x="4" y="17" width="3" height="3" fill="var(--pants)" />
-			<rect x="9" y="17" width="3" height="3" fill="var(--pants)" />
-		</svg>
+	<!-- A small game: walk Ramon along the ground and punch the four items to
+	     read about each one. The art comes from src/assets/sprites.js. -->
+	<div class="avatar-stage pixel-border" tabindex="0" role="group" aria-label="Game: walk Ramon to four of his interests. Use the left and right arrow keys to walk and Space to punch. On a touch screen, tap him.">
 		<div class="ground"></div>
+
+		<!-- Items are placed along the ground in art pixels (8px each). -->
+		<div class="stage-world" aria-hidden="true">
+			<div class="stage-item" data-item="writing" style="--x: 30">
+				<svg viewBox="0 0 10 10" shape-rendering="crispEdges">{{iconBook}}</svg>
+			</div>
+			<div class="stage-item" data-item="music" style="--x: 70">
+				<svg viewBox="0 0 10 10" shape-rendering="crispEdges">{{iconGuitar}}</svg>
+			</div>
+			<div class="stage-item" data-item="law" style="--x: 110">
+				<svg viewBox="0 0 10 10" shape-rendering="crispEdges">{{iconScales}}</svg>
+			</div>
+			<div class="stage-item" data-item="pixel-art" style="--x: 150">
+				<svg viewBox="0 0 10 10" shape-rendering="crispEdges">{{iconPalette}}</svg>
+			</div>
+		</div>
+
+		<!-- A 16×20 pixel sprite. The pupils move one pixel towards the mouse (see main.js). -->
+		<svg class="avatar" width="128" height="160" viewBox="0 0 16 20" shape-rendering="crispEdges" role="img" aria-label="Pixel-art Ramon in a baseball cap and headphones">
+			{{avatar}}
+		</svg>
+
+		<!-- Punched items move up here. A slot becomes a button once it's filled. -->
+		<div class="stage-bar">
+			<button class="stage-slot" type="button" data-item="writing" aria-label="Writing" disabled aria-hidden="true">
+				<svg viewBox="0 0 10 10" shape-rendering="crispEdges">{{iconBook}}</svg>
+			</button>
+			<button class="stage-slot" type="button" data-item="music" aria-label="Music" disabled aria-hidden="true">
+				<svg viewBox="0 0 10 10" shape-rendering="crispEdges">{{iconGuitar}}</svg>
+			</button>
+			<button class="stage-slot" type="button" data-item="law" aria-label="Law" disabled aria-hidden="true">
+				<svg viewBox="0 0 10 10" shape-rendering="crispEdges">{{iconScales}}</svg>
+			</button>
+			<button class="stage-slot" type="button" data-item="pixel-art" aria-label="Pixel art" disabled aria-hidden="true">
+				<svg viewBox="0 0 10 10" shape-rendering="crispEdges">{{iconPalette}}</svg>
+			</button>
+		</div>
+
+		<!-- Shown on the ground until the first walk or tap, and again when he
+		     stands at an item he hasn't punched. -->
+		<p class="stage-hint" aria-hidden="true">
+			<span class="hint-keys">Click, then ← → and Space</span>
+			<span class="hint-tap">Tap him</span>
+			<span class="hint-punch">Space to punch!</span>
+		</p>
+
+		<!-- Opened by the game (avatar-game.js) with the title and line of the punched item. -->
+		<dialog class="stage-overlay" aria-labelledby="stage-overlay-title">
+			<div class="stage-card pixel-border">
+				<button class="stage-close" type="button" aria-label="Close">×</button>
+				<h2 class="stage-card-title" id="stage-overlay-title"></h2>
+				<p class="stage-card-text"></p>
+			</div>
+		</dialog>
 	</div>
+
+	<!-- The same four lines for screen readers, and the text the overlay shows. -->
+	<ul class="visually-hidden" id="interests" aria-label="Some things about me">
+		<li data-item="writing"><span class="interest-title">Writing</span>: <span class="interest-text">I like writing short stories. I also wrote a novel.</span></li>
+		<li data-item="music"><span class="interest-title">Music</span>: <span class="interest-text">I play guitar in a blues and rock band.</span></li>
+		<li data-item="law"><span class="interest-title">Law</span>: <span class="interest-text">I studied law, and want to practice later in life to make a difference!</span></li>
+		<li data-item="pixel-art"><span class="interest-title">Pixel art</span>: <span class="interest-text">I like doodling, pixel art and cutting up magazines.</span></li>
+	</ul>
 </section>
 
 <section class="section" id="projects" aria-labelledby="projects-title">
