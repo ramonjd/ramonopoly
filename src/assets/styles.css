@@ -222,7 +222,9 @@ a:hover {
 
 /* Sized to sit on a line of the intro text without pushing the lines apart.
    On hover the button flips over like a card: the front turns away and the
-   back turns in. Each button needs a .button-front and a .button-back. */
+   back turns in. The front is a .button-front span holding the text. CSS
+   draws the back from the link's data-label, so the text shows only once
+   when the page has no styles. */
 .button {
 	display: inline-block;
 	position: relative;
@@ -235,7 +237,7 @@ a:hover {
 }
 
 .button-front,
-.button-back {
+.button::after {
 	display: block;
 	padding: 4px 10px;
 	color: var(--accent-text);
@@ -252,7 +254,11 @@ a:hover {
 		0 2px 0 0 var(--accent);
 }
 
-.button-back {
+/* The empty text after the slash stops screen readers reading the label
+   twice. Browsers too old to understand it use the line above instead. */
+.button::after {
+	content: attr(data-label);
+	content: attr(data-label) / "";
 	position: absolute;
 	inset: 0;
 	background: var(--highlight);
@@ -269,8 +275,8 @@ a:hover {
 	transform: rotateX(-180deg);
 }
 
-.button:hover .button-back,
-.button:focus-visible .button-back {
+.button:hover::after,
+.button:focus-visible::after {
 	transform: rotateX(0deg);
 }
 
@@ -751,7 +757,7 @@ a:hover {
 	}
 
 	.button-front,
-	.button-back {
+	.button::after {
 		transition: none;
 	}
 
