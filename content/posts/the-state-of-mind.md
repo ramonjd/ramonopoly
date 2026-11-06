@@ -5,13 +5,17 @@ date: 2026-11-06
 
 When writing and coding by hand was the only option, there were more people, there was more time.  
 
-We considered our sentences rather than pasting them, spent days arguing over variable names. Like any craft, the means of output and language and reason has a cost on the author and the reader: one to organise the thoughts in one's head and communicate them, another to digest, comprehend, empathise. 
+We considered our sentences rather than pasting them, spent days arguing over the suitability of variable names. Such things mattered, or so we thought at the time.
+
+Like any craft, the means of output and language and reason generates a cost for both author and reader: the author pays it to organise the thoughts in their head and communicate them, the reader pays to digest, comprehend, empathise. 
 
 One half of that cost equation has become extraordinarily cheaper. At the same time the other half's has risen. The time I take parsing the contents of your agent's response, fact-checking its claims with my own agent, and formulating my own response is now a mountain against the speck of effort it took to type the originating prompt. 
 
 "Fix this bug". 
 
 "Write a 100-line poem in iambic pentimeter."
+
+Hours reduced to seconds.
 
 Content must have an audience, but what are we asking of this audience? If they are human, you may ask them to enjoy some prose. This is not a onerous request. You then ask them to check if the code you committed fixes a critical bug blocking tens of thousands of users. We can reduce the cost equation in the latter situation by creating another agent to evaluate and test the content, the human operator promoted (or relegated depending on how you view it) to a gatekeeper of judgement and value. The former, the consumption of literature, is not so open to such transactional rebalancing. 
 
