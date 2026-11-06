@@ -633,6 +633,68 @@ a:hover {
 	font-size: 0.9em;
 }
 
+/* About page
+   ====================================================================== */
+
+/* flow-root keeps the floated image inside the page, even when the text is
+   shorter than it. */
+.about {
+	display: flow-root;
+}
+
+.about-sprites {
+	float: right;
+	margin: 0 0 24px 32px;
+	padding: 24px;
+	background: var(--surface-sunken);
+}
+
+.about-sprites svg {
+	display: block;
+	width: 192px;
+	height: auto;
+}
+
+/* Two columns when there's room, one when there isn't: a column is never
+   narrower than 16em. */
+.about .prose {
+	columns: 16em 2;
+	column-gap: 32px;
+}
+
+.about .prose p {
+	break-inside: avoid;
+}
+
+/* On a phone the image sits above the text instead of beside it. */
+@media (max-width: 600px) {
+	.about-sprites {
+		float: none;
+		width: fit-content;
+		margin: 0 auto 32px;
+	}
+}
+
+/* One outfit at a time, 4 seconds each, swapping instantly like a game
+   sprite. Each one waits its turn: the second starts 4 seconds in, the
+   third 8 seconds in. */
+.outfit {
+	opacity: 0;
+	animation: outfit-turn 12s step-end infinite;
+}
+
+.outfit:nth-child(2) {
+	animation-delay: 4s;
+}
+
+.outfit:nth-child(3) {
+	animation-delay: 8s;
+}
+
+.about-sprites:hover .outfit {
+	animation-play-state: paused;
+}
+
 /* Motion
    ====================================================================== */
 
@@ -645,6 +707,16 @@ a:hover {
 @keyframes bob {
 	50% {
 		transform: translateY(-6px);
+	}
+}
+
+/* Shown for the first third of the cycle, hidden for the rest. */
+@keyframes outfit-turn {
+	0% {
+		opacity: 1;
+	}
+	33.333% {
+		opacity: 0;
 	}
 }
 
@@ -661,5 +733,14 @@ a:hover {
 
 	.stage-item {
 		transition: none;
+	}
+
+	/* Keep to the first outfit. */
+	.outfit {
+		animation: none;
+	}
+
+	.outfit:first-child {
+		opacity: 1;
 	}
 }
