@@ -176,17 +176,29 @@ a:hover {
 	display: none;
 }
 
+/* The footer runs the full width of the window. The scenery from
+   footer-scene.js sits along its bottom edge and repeats sideways, 8px per
+   art pixel like the avatar, so 144px tall. The bottom padding keeps the text
+   above it. */
 .site-footer {
+	margin-top: 96px;
+	padding-top: 32px;
+	padding-bottom: calc(144px + 24px);
+	color: var(--muted);
+	font-family: var(--pixel-font);
+	font-size: 16px;
+	background: url("/assets/footer-night.svg") left bottom / auto 144px repeat-x;
+}
+
+[data-theme="light"] .site-footer {
+	background-image: url("/assets/footer-day.svg");
+}
+
+.site-footer-text {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	gap: 16px;
-	margin-top: 96px;
-	padding-top: 32px;
-	padding-bottom: 48px;
-	color: var(--muted);
-	font-family: var(--pixel-font);
-	font-size: 16px;
 }
 
 /* Home page

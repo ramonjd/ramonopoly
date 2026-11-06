@@ -20,7 +20,7 @@ npm run preview   # builds, then serves dist/ locally
 content/posts/     Blog posts, one Markdown file each
 content/posts/images/  Featured images for posts
 src/templates/     HTML templates: layout, home page, about page, blog index, post
-src/assets/        styles.css, main.js, avatar-game.js (the hero's game) and sprites.js (its pixel art), copied as they are
+src/assets/        styles.css, main.js, avatar-game.js (the hero's game), sprites.js (its pixel art) and footer-scene.js (the footer's scenery), copied as they are
 scripts/build.js   The build
 ```
 

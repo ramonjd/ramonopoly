@@ -273,7 +273,9 @@ export const ICONS = {
 
 // Turns a grid into SVG <rect>s, one per run of same-coloured pixels on a
 // row. Put the result inside an <svg> whose viewBox matches the grid's size.
-export function drawSprite(rows) {
+// It uses the colours above unless it is given another list, like the
+// footer scene's.
+export function drawSprite(rows, colours = COLOURS) {
 	const rects = [];
 	const pupils = [];
 
@@ -293,9 +295,9 @@ export function drawSprite(rows) {
 				end++;
 			}
 			if (keys[start] !== '.') {
-				const colour = COLOURS[keys[start]];
+				const colour = colours[keys[start]];
 				if (!colour) {
-					throw new Error(`No colour for "${keys[start]}" in sprites.js.`);
+					throw new Error(`No colour for "${keys[start]}".`);
 				}
 				const paint = colour.startsWith('#') ? `fill="${colour}"` : `class="${colour}"`;
 				rects.push(`<rect x="${start}" y="${y}" width="${end - start}" height="1" ${paint} />`);

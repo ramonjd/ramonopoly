@@ -19,6 +19,7 @@ import path from 'node:path';
 import { marked } from 'marked';
 import { drawSprite, FRAMES, ICONS } from '../src/assets/sprites.js';
 import { OUTFITS } from '../src/assets/outfits.js';
+import { BAT, BIRD, SCENE, SCENE_COLOURS } from '../src/assets/footer-scene.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const TEMPLATES_DIR = path.join(ROOT, 'src', 'templates');
@@ -43,6 +44,18 @@ async function build() {
 		path.join(OUTPUT_DIR, 'favicon.svg'),
 		`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 16 16" shape-rendering="crispEdges"><style>.px-hair { fill: #7a5233; }</style>${drawSprite(FRAMES.front.slice(0, 13))}</svg>\n`
 	);
+
+	// The footer scenery: the same scene in day colours with the lorikeet for
+	// the light theme, and in night colours with the bat for the dark theme.
+	for (const [file, colours, critter] of [
+		['footer-day.svg', SCENE_COLOURS.day, BIRD],
+		['footer-night.svg', SCENE_COLOURS.night, BAT],
+	]) {
+		await writeFile(
+			path.join(OUTPUT_DIR, 'assets', file),
+			`<svg xmlns="http://www.w3.org/2000/svg" width="64" height="18" viewBox="0 0 64 18" shape-rendering="crispEdges">${drawSprite(SCENE, colours)}<g transform="translate(${critter.x} ${critter.y})">${drawSprite(critter.rows, colours)}</g></svg>\n`
+		);
+	}
 
 	// Featured images are served from /blog/images/.
 	if (existsSync(POST_IMAGES_DIR)) {
