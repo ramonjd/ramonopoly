@@ -1,0 +1,405 @@
+/* Colours
+   ======================================================================
+   Dark is the default. The inline script in layout.html sets data-theme
+   on <html> from the saved choice or the system setting. */
+
+:root,
+[data-theme="dark"] {
+	--bg: #0f1117;
+	--surface: #171a23;
+	--surface-sunken: #1f2330;
+	--text: #eceae6;
+	--muted: #9aa0aa;
+	--line: #eceae6;
+	--accent: #7ce38b;
+	--accent-text: #0f1117;
+	--highlight: #ffb547;
+	--hair: #7a5233;
+	--pants: #4a5a80;
+	--ground: #2b3242;
+}
+
+[data-theme="light"] {
+	--bg: #f4f1e8;
+	--surface: #ffffff;
+	--surface-sunken: #eae5d6;
+	--text: #16181d;
+	--muted: #575d68;
+	--line: #16181d;
+	--accent: #1e7a3b;
+	--accent-text: #ffffff;
+	--highlight: #a14a06;
+	--hair: #4a3020;
+	--pants: #3a4a6b;
+	--ground: #d8d1bc;
+}
+
+/* Base
+   ====================================================================== */
+
+:root {
+	--pixel-font: "Pixelify Sans", monospace;
+	--body-font: Inter, system-ui, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--body-font);
+	font-size: 18px;
+	line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	font-family: var(--pixel-font);
+	line-height: 1.1;
+}
+
+h1 {
+	font-size: clamp(48px, 7vw, 88px);
+}
+
+h2 {
+	font-size: 44px;
+}
+
+h3 {
+	font-size: 26px;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: var(--accent);
+}
+
+a:hover {
+	color: var(--highlight);
+}
+
+.muted {
+	color: var(--muted);
+}
+
+.container {
+	width: 100%;
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: 0 24px;
+}
+
+/* A chunky 4px border with notched corners, like old game UI. */
+.pixel-border {
+	box-shadow:
+		-4px 0 0 0 var(--line),
+		4px 0 0 0 var(--line),
+		0 -4px 0 0 var(--line),
+		0 4px 0 0 var(--line);
+}
+
+/* Header and footer
+   ====================================================================== */
+
+.site-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding-top: 28px;
+	padding-bottom: 28px;
+}
+
+.logo {
+	color: var(--text);
+	font-family: var(--pixel-font);
+	font-size: 28px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.cursor {
+	color: var(--accent);
+	animation: blink 1s steps(1) infinite;
+}
+
+.site-nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.site-nav a {
+	padding: 12px;
+	font-family: var(--pixel-font);
+	text-decoration: none;
+}
+
+.theme-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	margin-left: 12px;
+	border: 0;
+	background: var(--surface);
+	color: var(--text);
+	fill: currentColor;
+	cursor: pointer;
+}
+
+/* Show the sun in dark mode and the moon in light mode. */
+[data-theme="light"] .icon-sun,
+[data-theme="dark"] .icon-moon {
+	display: none;
+}
+
+.site-footer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 16px;
+	margin-top: 96px;
+	padding-top: 32px;
+	padding-bottom: 48px;
+	color: var(--muted);
+	font-family: var(--pixel-font);
+	font-size: 16px;
+}
+
+/* Home page
+   ====================================================================== */
+
+.hero {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 56px;
+	padding-top: 48px;
+}
+
+.hero-text {
+	display: flex;
+	flex: 999 1 480px;
+	flex-direction: column;
+	gap: 24px;
+	min-width: 0;
+}
+
+.eyebrow {
+	color: var(--accent);
+	font-family: var(--pixel-font);
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.lead {
+	max-width: 34em;
+	font-size: 20px;
+}
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 12px 20px;
+	background: var(--accent);
+	color: var(--accent-text);
+	font-family: var(--pixel-font);
+	font-size: 20px;
+	text-decoration: none;
+	box-shadow:
+		-4px 0 0 0 var(--accent),
+		4px 0 0 0 var(--accent),
+		0 -4px 0 0 var(--accent),
+		0 4px 0 0 var(--accent);
+}
+
+.button:hover {
+	color: var(--accent-text);
+}
+
+.avatar-stage {
+	display: flex;
+	flex: 1 1 320px;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	max-width: 320px;
+	height: 280px;
+	margin: 0 auto;
+	overflow: hidden;
+	background: var(--surface-sunken);
+}
+
+.avatar {
+	animation: bob 1.2s steps(2) infinite;
+}
+
+.ground {
+	width: 100%;
+	height: 36px;
+	background: var(--ground);
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	margin-top: 112px;
+}
+
+.section-heading {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.section-heading a {
+	font-family: var(--pixel-font);
+}
+
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 32px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 28px;
+	background: var(--surface);
+}
+
+.card a {
+	margin-top: auto;
+	font-family: var(--pixel-font);
+}
+
+.tag {
+	align-self: flex-start;
+	padding: 2px 8px;
+	border: 2px solid var(--highlight);
+	color: var(--highlight);
+	font-family: var(--pixel-font);
+	font-size: 14px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+/* Blog
+   ====================================================================== */
+
+.page-top {
+	margin-top: 48px;
+}
+
+.post-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border-bottom: 2px dashed var(--muted);
+}
+
+.post-list li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 8px 24px;
+	padding: 22px 0;
+	border-top: 2px dashed var(--muted);
+}
+
+.post-list a {
+	color: var(--text);
+	font-size: 22px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.post-list a:hover {
+	color: var(--accent);
+}
+
+.post-list time {
+	color: var(--muted);
+	font-family: var(--pixel-font);
+}
+
+.post {
+	max-width: 40em;
+}
+
+.post-header {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-bottom: 40px;
+}
+
+.post-header h1 {
+	font-size: clamp(36px, 5vw, 56px);
+}
+
+.prose > * + * {
+	margin-top: 1em;
+}
+
+.prose h2 {
+	margin-top: 1.6em;
+	font-size: 32px;
+}
+
+.prose img {
+	max-width: 100%;
+	height: auto;
+}
+
+.prose pre {
+	overflow-x: auto;
+	padding: 16px;
+	background: var(--surface);
+}
+
+.prose code {
+	font-size: 0.9em;
+}
+
+/* Motion
+   ====================================================================== */
+
+@keyframes blink {
+	50% {
+		opacity: 0;
+	}
+}
+
+@keyframes bob {
+	50% {
+		transform: translateY(-6px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cursor,
+	.avatar {
+		animation: none;
+	}
+}

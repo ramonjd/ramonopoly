@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{title}}</title>
+
+	<script>
+		// Set the theme before the page paints, so it never flashes the wrong colours.
+		(function () {
+			let saved = null;
+			try {
+				saved = localStorage.getItem('theme');
+			} catch {}
+			const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+			document.documentElement.dataset.theme = saved || (prefersLight ? 'light' : 'dark');
+		})();
+	</script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pixelify+Sans:wght@400;700&display=swap">
+	<link rel="stylesheet" href="/assets/styles.css">
+	<script type="module" src="/assets/main.js"></script>
+</head>
+<body>
+	<header class="site-header container">
+		<a class="logo" href="/">RAMON<span class="cursor">_</span></a>
+
+		<nav class="site-nav" aria-label="Main">
+			<a href="/#about">About</a>
+			<a href="/#projects">Projects</a>
+			<a href="/blog/">Blog</a>
+
+			<button class="theme-toggle pixel-border" type="button" aria-label="Switch theme">
+				<svg class="icon-sun" width="20" height="20" viewBox="0 0 10 10" shape-rendering="crispEdges" aria-hidden="true">
+					<rect x="4" y="0" width="2" height="1" />
+					<rect x="4" y="9" width="2" height="1" />
+					<rect x="0" y="4" width="1" height="2" />
+					<rect x="9" y="4" width="1" height="2" />
+					<rect x="3" y="2" width="4" height="6" />
+					<rect x="2" y="3" width="6" height="4" />
+					<rect x="1" y="1" width="1" height="1" />
+					<rect x="8" y="1" width="1" height="1" />
+					<rect x="1" y="8" width="1" height="1" />
+					<rect x="8" y="8" width="1" height="1" />
+				</svg>
+				<svg class="icon-moon" width="20" height="20" viewBox="0 0 10 10" shape-rendering="crispEdges" aria-hidden="true">
+					<rect x="3" y="0" width="4" height="1" />
+					<rect x="1" y="1" width="4" height="1" />
+					<rect x="0" y="2" width="4" height="6" />
+					<rect x="1" y="8" width="7" height="1" />
+					<rect x="3" y="9" width="4" height="1" />
+					<rect x="4" y="7" width="5" height="1" />
+					<rect x="8" y="5" width="2" height="3" />
+				</svg>
+			</button>
+		</nav>
+	</header>
+
+	<main class="container">
+		{{content}}
+	</main>
+
+	<footer class="site-footer container">
+		<span>© 2026 Ramon</span>
+		<a href="https://github.com/ramonjd">GitHub</a>
+	</footer>
+</body>
+</html>

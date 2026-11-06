@@ -1,0 +1,92 @@
+<section class="hero" id="about" aria-labelledby="hero-title">
+	<div class="hero-text">
+		<p class="eyebrow">Player 1 ready</p>
+		<h1 id="hero-title">Hi, I'm Ramon.</h1>
+		<p class="lead">
+			Full-stack web developer, UX designer and writer. WordPress Core
+			Committer at Automattic, working on the block editor and WordPress
+			core. I'm interested in media, content architecture, responsive
+			styling and AI tools.
+		</p>
+		<p><a class="button" href="/blog/">Read the blog</a></p>
+	</div>
+
+	<div class="avatar-stage pixel-border">
+		<!-- A 16×20 pixel sprite. The pupils move one pixel towards the mouse (see main.js). -->
+		<svg class="avatar" width="128" height="160" viewBox="0 0 16 20" shape-rendering="crispEdges" role="img" aria-label="Pixel-art Ramon in a baseball cap">
+			<!-- Cap -->
+			<rect x="5" y="0" width="6" height="1" fill="#FFB547" />
+			<rect x="4" y="1" width="8" height="2" fill="#FFB547" />
+			<rect x="7" y="1" width="2" height="1" fill="#FFFFFF" />
+			<rect x="2" y="3" width="12" height="1" fill="#B8721E" />
+
+			<!-- Face -->
+			<rect x="3" y="4" width="1" height="1" fill="var(--hair)" />
+			<rect x="4" y="4" width="8" height="1" fill="#E8B48A" />
+			<rect x="12" y="4" width="1" height="1" fill="var(--hair)" />
+			<rect x="3" y="5" width="1" height="3" fill="#E8B48A" />
+			<rect x="7" y="5" width="2" height="3" fill="#E8B48A" />
+			<rect x="12" y="5" width="1" height="3" fill="#E8B48A" />
+			<rect x="3" y="8" width="10" height="2" fill="#E8B48A" />
+			<rect x="3" y="10" width="3" height="1" fill="#E8B48A" />
+			<rect x="6" y="10" width="4" height="1" fill="#B5524A" />
+			<rect x="10" y="10" width="3" height="1" fill="#E8B48A" />
+			<rect x="4" y="11" width="8" height="1" fill="#E8B48A" />
+			<rect x="6" y="12" width="4" height="1" fill="#E8B48A" />
+
+			<!-- Eyes: 3×3 whites, each with a 1×1 pupil that starts in the centre -->
+			<rect x="4" y="5" width="3" height="3" fill="#FFFFFF" />
+			<rect x="9" y="5" width="3" height="3" fill="#FFFFFF" />
+			<rect class="pupil" x="5" y="6" width="1" height="1" fill="#1A1A1A" />
+			<rect class="pupil" x="10" y="6" width="1" height="1" fill="#1A1A1A" />
+
+			<!-- Shirt and arms -->
+			<rect x="3" y="13" width="10" height="1" fill="var(--accent)" />
+			<rect x="2" y="14" width="12" height="1" fill="var(--accent)" />
+			<rect x="2" y="15" width="1" height="1" fill="#E8B48A" />
+			<rect x="3" y="15" width="10" height="1" fill="var(--accent)" />
+			<rect x="13" y="15" width="1" height="1" fill="#E8B48A" />
+			<rect x="3" y="16" width="10" height="1" fill="var(--accent)" />
+
+			<!-- Legs -->
+			<rect x="4" y="17" width="3" height="3" fill="var(--pants)" />
+			<rect x="9" y="17" width="3" height="3" fill="var(--pants)" />
+		</svg>
+		<div class="ground"></div>
+	</div>
+</section>
+
+<section class="section" id="projects" aria-labelledby="projects-title">
+	<div class="section-heading">
+		<h2 id="projects-title">Quest log</h2>
+		<p class="muted">Things I've built or am building.</p>
+	</div>
+
+	<div class="card-grid">
+		<article class="card pixel-border">
+			<h3>Responsive block styling</h3>
+			<p class="muted">Per-breakpoint styles for blocks in Gutenberg.</p>
+			<a href="https://github.com/WordPress/gutenberg/issues/75707">View on GitHub ▸</a>
+		</article>
+
+		<article class="card pixel-border">
+			<h3>Media Editor Modal</h3>
+			<p class="muted">Image cropping and editing in the block editor, built on @wordpress/media-transform.</p>
+		</article>
+
+		<article class="card pixel-border">
+			<span class="tag">Planned</span>
+			<h3>Printfast</h3>
+			<p class="muted">Print-ready designs straight from a Spacefast site.</p>
+		</article>
+	</div>
+</section>
+
+<section class="section" id="blog" aria-labelledby="blog-title">
+	<div class="section-heading">
+		<h2 id="blog-title">Save points</h2>
+		<a href="/blog/">All posts ▸</a>
+	</div>
+
+	{{latestPosts}}
+</section>

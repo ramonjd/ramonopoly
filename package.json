@@ -1,0 +1,16 @@
+{
+  "name": "ramonopoly",
+  "private": true,
+  "description": "Ramon's personal site: a one-page portfolio and a simple blog.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "preview": "npm run build && npx --yes serve dist"
+  },
+  "dependencies": {
+    "marked": "^18.1.3"
+  }
+}
