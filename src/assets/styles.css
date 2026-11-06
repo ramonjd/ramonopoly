@@ -570,12 +570,28 @@ a:hover {
 
 .post-list li {
 	display: flex;
+	align-items: center;
+	gap: 24px;
+	padding: 22px 0;
+	border-top: 2px dashed var(--muted);
+}
+
+/* The post's featured image, cropped to a small square. */
+.post-thumb {
+	flex: none;
+	width: 80px;
+	height: 80px;
+	object-fit: cover;
+}
+
+/* The title, with the date on the right, or under the title when there isn't room. */
+.post-list-text {
+	flex: 1;
+	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
 	justify-content: space-between;
 	gap: 8px 24px;
-	padding: 22px 0;
-	border-top: 2px dashed var(--muted);
 }
 
 .post-list a {
@@ -607,6 +623,14 @@ a:hover {
 
 .post-header h1 {
 	font-size: clamp(36px, 5vw, 56px);
+}
+
+/* The post's featured image, under the title and date, at its own shape. */
+.post-image {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin-bottom: 40px;
 }
 
 .prose > * + * {

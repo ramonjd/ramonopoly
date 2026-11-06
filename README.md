@@ -18,6 +18,7 @@ npm run preview   # builds, then serves dist/ locally
 
 ```
 content/posts/     Blog posts, one Markdown file each
+content/posts/images/  Featured images for posts
 src/templates/     HTML templates: layout, home page, about page, blog index, post
 src/assets/        styles.css, main.js, avatar-game.js (the hero's game) and sprites.js (its pixel art), copied as they are
 scripts/build.js   The build
@@ -39,6 +40,15 @@ The post, in Markdown.
 ```
 
 Add `draft: true` to the front matter to leave a post out of the build. The home page shows the three newest posts.
+
+To give a post a featured image, put the file in `content/posts/images/` and name it in the front matter, with a short description for people who can't see it:
+
+```md
+image: state-of-mind.jpg
+imageAlt: What the image shows
+```
+
+The image appears at the top of the post and as a small square thumbnail in the post lists. The thumbnail is the same file shrunk by the browser, so keep image files small.
 
 ## Deploying
 

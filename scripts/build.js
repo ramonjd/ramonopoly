@@ -9,7 +9,11 @@
 //   ---
 //
 // Add `draft: true` to keep a post out of the build.
+//
+// To give a post a featured image, put the file in content/posts/images and
+// add `image: file-name.jpg` and `imageAlt: what the image shows`.
 
+import { existsSync } from 'node:fs';
 import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { marked } from 'marked';
@@ -20,6 +24,7 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const TEMPLATES_DIR = path.join(ROOT, 'src', 'templates');
 const ASSETS_DIR = path.join(ROOT, 'src', 'assets');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
+const POST_IMAGES_DIR = path.join(POSTS_DIR, 'images');
 const OUTPUT_DIR = path.join(ROOT, 'dist');
 
 const SITE_NAME = 'Ramon';
@@ -30,6 +35,13 @@ await build();
 async function build() {
 	await rm(OUTPUT_DIR, { recursive: true, force: true });
 	await cp(ASSETS_DIR, path.join(OUTPUT_DIR, 'assets'), { recursive: true });
+
+	// Featured images are served from /blog/images/.
+	if (existsSync(POST_IMAGES_DIR)) {
+		await cp(POST_IMAGES_DIR, path.join(OUTPUT_DIR, 'blog', 'images'), {
+			recursive: true,
+		});
+	}
 
 	const posts = await loadPosts();
 
@@ -69,6 +81,9 @@ async function build() {
 				title: escapeHtml(post.title),
 				date: post.date,
 				displayDate: formatDate(post.date),
+				image: post.image
+					? `<img class="post-image pixel-border" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt)}">`
+					: '',
 				body: post.html,
 			}),
 		});
@@ -103,6 +118,8 @@ async function loadPost(file) {
 		title: meta.title,
 		date: meta.date,
 		draft: meta.draft === 'true',
+		image: meta.image ? `/blog/images/${meta.image}` : '',
+		imageAlt: meta.imageAlt ?? '',
 		html: marked.parse(body),
 	};
 }
@@ -137,13 +154,22 @@ function renderPostList(posts) {
 		return '<p class="muted">No posts yet.</p>';
 	}
 
-	const items = posts.map(
-		(post) => `
+	const items = posts.map((post) => {
+		// The thumbnail has empty alt text so screen readers skip it: the
+		// title next to it already says which post it is.
+		const thumbnail = post.image
+			? `<img class="post-thumb pixel-border" src="${escapeHtml(post.image)}" alt="" width="80" height="80" loading="lazy">`
+			: '';
+
+		return `
 			<li>
-				<a href="/blog/${post.slug}/">${escapeHtml(post.title)}</a>
-				<time datetime="${post.date}">${formatDate(post.date)}</time>
-			</li>`
-	);
+				${thumbnail}
+				<div class="post-list-text">
+					<a href="/blog/${post.slug}/">${escapeHtml(post.title)}</a>
+					<time datetime="${post.date}">${formatDate(post.date)}</time>
+				</div>
+			</li>`;
+	});
 
 	return `<ul class="post-list">${items.join('')}\n</ul>`;
 }
