@@ -36,6 +36,14 @@ async function build() {
 	await rm(OUTPUT_DIR, { recursive: true, force: true });
 	await cp(ASSETS_DIR, path.join(OUTPUT_DIR, 'assets'), { recursive: true });
 
+	// The site icon: the avatar's head, from the top of his cap down to his
+	// chin (the first 13 rows of the front frame). The icon can't read
+	// styles.css, so it sets the hair colour itself: the dark theme's --hair.
+	await writeFile(
+		path.join(OUTPUT_DIR, 'favicon.svg'),
+		`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 16 16" shape-rendering="crispEdges"><style>.px-hair { fill: #7a5233; }</style>${drawSprite(FRAMES.front.slice(0, 13))}</svg>\n`
+	);
+
 	// Featured images are served from /blog/images/.
 	if (existsSync(POST_IMAGES_DIR)) {
 		await cp(POST_IMAGES_DIR, path.join(OUTPUT_DIR, 'blog', 'images'), {
