@@ -1,6 +1,8 @@
 ---
 title: The state of mind
 date: 2026-11-06
+image: state-of-mind.svg
+imageAlt: A pixel-art brain with a kitchen tap coming out of the top, running water into a puddle
 ---
 
 When writing and coding by hand was the only option, there were more people, there was more time.  
