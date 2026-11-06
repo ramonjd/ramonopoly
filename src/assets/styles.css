@@ -210,25 +210,58 @@ a:hover {
 	font-size: 20px;
 }
 
+/* Sized to sit on a line of the intro text without pushing the lines apart.
+   On hover the button flips over like a card: the front turns away and the
+   back turns in. Each button needs a .button-front and a .button-back. */
 .button {
-	display: inline-flex;
-	align-items: center;
-	min-height: 44px;
-	padding: 12px 20px;
-	background: var(--accent);
-	color: var(--accent-text);
+	display: inline-block;
+	position: relative;
 	font-family: var(--pixel-font);
-	font-size: 20px;
+	font-size: 16px;
+	line-height: 1;
 	text-decoration: none;
-	box-shadow:
-		-4px 0 0 0 var(--accent),
-		4px 0 0 0 var(--accent),
-		0 -4px 0 0 var(--accent),
-		0 4px 0 0 var(--accent);
+	white-space: nowrap;
+	perspective: 80px;
 }
 
-.button:hover {
+.button-front,
+.button-back {
+	display: block;
+	padding: 4px 10px;
 	color: var(--accent-text);
+	backface-visibility: hidden;
+	transition: transform 0.4s ease-in-out;
+}
+
+.button-front {
+	background: var(--accent);
+	box-shadow:
+		-2px 0 0 0 var(--accent),
+		2px 0 0 0 var(--accent),
+		0 -2px 0 0 var(--accent),
+		0 2px 0 0 var(--accent);
+}
+
+.button-back {
+	position: absolute;
+	inset: 0;
+	background: var(--highlight);
+	box-shadow:
+		-2px 0 0 0 var(--highlight),
+		2px 0 0 0 var(--highlight),
+		0 -2px 0 0 var(--highlight),
+		0 2px 0 0 var(--highlight);
+	transform: rotateX(180deg);
+}
+
+.button:hover .button-front,
+.button:focus-visible .button-front {
+	transform: rotateX(-180deg);
+}
+
+.button:hover .button-back,
+.button:focus-visible .button-back {
+	transform: rotateX(0deg);
 }
 
 .avatar-stage {
@@ -401,5 +434,10 @@ a:hover {
 	.cursor,
 	.avatar {
 		animation: none;
+	}
+
+	.button-front,
+	.button-back {
+		transition: none;
 	}
 }
