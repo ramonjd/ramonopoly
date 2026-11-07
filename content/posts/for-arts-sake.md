@@ -43,9 +43,9 @@ The rewards of both are enrichment, learning about ourselves, discovering our pa
 
 As audiences, we strive to understand because it is the toll we pay to cross the great expanse, on roads paved by artists, where each stone is a chapter of a book, a stroke of the brush, or a bronze cast. 
 
-That expanse is still there, but has become soaked with AI slop. Without the artists to build these roads in the first place, humanity's journey to understand itself would not be as interesting.
+This expanse of human invention is still out there, but navigating through it has become more demanding as our internal compasses adjust to the daily task of separating human invention from facsimile. I believe more than ever we need the rough sketches, the streams of consciousness, the voices and the grammatical chaos that can only come from our meaty brothers and sisters. Without all this, humanity's journey to understand itself would not be as interesting.
 
-Who is going to read all the poems, the novels, hear the music, or soak in the paintings if not for us? Machines will consume it all in order to complete a task or better respond to our demands of them. 
+After all, who is going to read all the poems, the novels, hear the music, or soak in the paintings if not for us? Machines will consume it all in order to complete a task or better respond to our demands of them. 
 
-Humans will consume them because they are, after all, by us, for us. If we create, not for us, but for the machines, then what is the point.
+We will consume them because they are, after all, by us, for us. If we create, not for us, but for the machines, then what is the point.
 
