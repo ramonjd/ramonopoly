@@ -12,6 +12,10 @@
 //
 // To give a post a featured image, put the file in content/posts/images and
 // add `image: file-name.jpg` and `imageAlt: what the image shows`.
+//
+// Videos for posts go in content/posts/videos and are served from
+// /blog/videos/, so a post can show one with
+// <video src="/blog/videos/file-name.mp4" controls></video>.
 
 import { existsSync } from 'node:fs';
 import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -25,7 +29,6 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const TEMPLATES_DIR = path.join(ROOT, 'src', 'templates');
 const ASSETS_DIR = path.join(ROOT, 'src', 'assets');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
-const POST_IMAGES_DIR = path.join(POSTS_DIR, 'images');
 const OUTPUT_DIR = path.join(ROOT, 'dist');
 
 const SITE_NAME = 'Ramon';
@@ -57,11 +60,14 @@ async function build() {
 		);
 	}
 
-	// Featured images are served from /blog/images/.
-	if (existsSync(POST_IMAGES_DIR)) {
-		await cp(POST_IMAGES_DIR, path.join(OUTPUT_DIR, 'blog', 'images'), {
-			recursive: true,
-		});
+	// Featured images are served from /blog/images/, videos from /blog/videos/.
+	for (const folder of ['images', 'videos']) {
+		const source = path.join(POSTS_DIR, folder);
+		if (existsSync(source)) {
+			await cp(source, path.join(OUTPUT_DIR, 'blog', folder), {
+				recursive: true,
+			});
+		}
 	}
 
 	const posts = await loadPosts();

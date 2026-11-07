@@ -660,9 +660,14 @@ a:hover {
 	font-size: 32px;
 }
 
-.prose img {
+.prose img,
+.prose video {
 	max-width: 100%;
 	height: auto;
+}
+
+.prose video {
+	display: block;
 }
 
 .prose pre {
