@@ -13,6 +13,9 @@
 // To give a post a featured image, put the file in content/posts/images and
 // add `image: file-name.jpg` and `imageAlt: what the image shows`.
 //
+// To tag a post, add `tags: Essays, WordPress`. Each tag gets a page at
+// /blog/tags/essays/ listing its posts.
+//
 // Videos for posts go in content/posts/videos and are served from
 // /blog/videos/, so a post can show one with
 // <video src="/blog/videos/file-name.mp4" controls></video>.
@@ -93,21 +96,54 @@ async function build() {
 		}),
 	});
 
+	const blogTemplate = await loadTemplate('blog');
 	await writePage('blog/index.html', {
 		title: `Blog · ${SITE_NAME}`,
-		content: render(await loadTemplate('blog'), {
+		content: render(blogTemplate, {
+			heading: 'Save points',
 			posts: renderPostList(posts),
 		}),
 	});
 
+	// One page per tag, listing its posts newest first. Tags that differ only
+	// in capitals, such as WordPress and wordpress, share a page, named after
+	// the first spelling.
+	const tags = new Map();
+	for (const post of posts) {
+		for (const tag of post.tags) {
+			const slug = tagSlug(tag);
+			if (!tags.has(slug)) {
+				tags.set(slug, { name: tag, posts: [] });
+			}
+			tags.get(slug).posts.push(post);
+		}
+	}
+	for (const [slug, tag] of tags) {
+		await writePage(`blog/tags/${slug}/index.html`, {
+			title: `${escapeHtml(tag.name)} · ${SITE_NAME}`,
+			content: render(blogTemplate, {
+				heading: escapeHtml(tag.name),
+				posts: renderPostList(tag.posts),
+			}),
+		});
+	}
+
 	const postTemplate = await loadTemplate('post');
 	for (const post of posts) {
+		const tagLinks = post.tags.map(
+			(tag) =>
+				`<a href="/blog/tags/${tagSlug(tag)}/">${escapeHtml(tag)}</a>`
+		);
+
 		await writePage(`blog/${post.slug}/index.html`, {
 			title: `${escapeHtml(post.title)} · ${SITE_NAME}`,
 			content: render(postTemplate, {
 				title: escapeHtml(post.title),
 				date: post.date,
 				displayDate: formatDate(post.date),
+				tags: tagLinks.length
+					? `<p class="post-tags muted">Tagged ${tagLinks.join(', ')}</p>`
+					: '',
 				image: post.image
 					? `<img class="post-image pixel-border" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt)}">`
 					: '',
@@ -147,6 +183,10 @@ async function loadPost(file) {
 		draft: meta.draft === 'true',
 		image: meta.image ? `/blog/images/${meta.image}` : '',
 		imageAlt: meta.imageAlt ?? '',
+		tags: (meta.tags ?? '')
+			.split(',')
+			.map((tag) => tag.trim())
+			.filter(Boolean),
 		html: marked.parse(body),
 	};
 }
@@ -236,6 +276,15 @@ function formatDate(isoDate) {
 		year: 'numeric',
 		timeZone: 'UTC',
 	});
+}
+
+// The tag's part of its page address: lower case, with each run of other
+// characters turned into one hyphen, so "Image editing" is image-editing.
+function tagSlug(tag) {
+	return tag
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-|-$/g, '');
 }
 
 function escapeHtml(text) {

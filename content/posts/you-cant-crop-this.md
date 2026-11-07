@@ -1,6 +1,7 @@
 ---
 title: You can't crop this.
 date: 2026-11-07
+tags: Projects
 image: cropped-avatar.svg
 imageAlt: Pixel-art Ramon with a crop box drawn over him, its edge cutting his face in half
 ---

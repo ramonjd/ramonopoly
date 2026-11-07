@@ -1,6 +1,7 @@
 ---
 title: For art's sake
 date: 2026-11-06
+tags: Essays
 image: state-of-mind.svg
 imageAlt: A pixel-art brain with a kitchen tap coming out of the top, running water into a puddle
 ---

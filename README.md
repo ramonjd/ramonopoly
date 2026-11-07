@@ -50,6 +50,14 @@ imageAlt: What the image shows
 
 The image appears at the top of the post and as a small square thumbnail in the post lists. The thumbnail is the same file shrunk by the browser, so keep image files small.
 
+To tag a post, list its tags in the front matter, separated by commas. Use one tag to treat it like a category, or several:
+
+```md
+tags: Essays, WordPress
+```
+
+Each tag gets a page listing its posts, such as `/blog/tags/essays/`, and the post links to its tags under the date. Tags that differ only in capitals, such as `WordPress` and `wordpress`, share one page.
+
 ## Deploying
 
 The site is hosted on [Spacefast](https://www.npmjs.com/package/spacefast). Build, then publish `dist/` with the Spacefast CLI:
