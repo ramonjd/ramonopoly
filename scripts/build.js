@@ -182,10 +182,11 @@ function renderPostList(posts) {
 	}
 
 	const items = posts.map((post) => {
-		// The thumbnail has empty alt text so screen readers skip it: the
-		// title next to it already says which post it is.
+		// The thumbnail links to the post too, for mouse and touch. Keyboards
+		// and screen readers skip it, since the title next to it is already a
+		// link to the same post.
 		const thumbnail = post.image
-			? `<img class="post-thumb pixel-border" src="${escapeHtml(post.image)}" alt="" width="80" height="80" loading="lazy">`
+			? `<a class="post-thumb-link" href="/blog/${post.slug}/" tabindex="-1" aria-hidden="true"><img class="post-thumb pixel-border" src="${escapeHtml(post.image)}" alt="" width="80" height="80" loading="lazy"></a>`
 			: '';
 
 		return `

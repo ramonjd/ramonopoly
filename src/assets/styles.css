@@ -594,9 +594,13 @@ a:hover {
 	border-top: 2px dashed var(--muted);
 }
 
+.post-thumb-link {
+	flex: none;
+}
+
 /* The post's featured image, cropped to a small square. */
 .post-thumb {
-	flex: none;
+	display: block;
 	width: 80px;
 	height: 80px;
 	object-fit: cover;
