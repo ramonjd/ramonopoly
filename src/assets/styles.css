@@ -670,6 +670,30 @@ a:hover {
 	display: block;
 }
 
+/* Each bullet is an 8px square, the size of one art pixel in the hero,
+   centred on the first line of the item. The zero-width space keeps Safari
+   reading it as a list: VoiceOver drops list semantics when the bullets are
+   removed, unless the items have ::before content. */
+.prose ul {
+	padding-left: 0;
+	list-style: none;
+}
+
+.prose ul li {
+	position: relative;
+	padding-left: 28px;
+}
+
+.prose ul li::before {
+	content: "\200B";
+	position: absolute;
+	top: calc(0.8em - 4px);
+	left: 6px;
+	width: 8px;
+	height: 8px;
+	background: var(--accent);
+}
+
 .prose pre {
 	overflow-x: auto;
 	padding: 16px;
