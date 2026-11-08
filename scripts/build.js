@@ -130,9 +130,9 @@ async function build() {
 
 	const postTemplate = await loadTemplate('post');
 	for (const post of posts) {
-		const tagLinks = post.tags.map(
+		const tagItems = post.tags.map(
 			(tag) =>
-				`<a href="/blog/tags/${tagSlug(tag)}/">${escapeHtml(tag)}</a>`
+				`<li><a href="/blog/tags/${tagSlug(tag)}/">${escapeHtml(tag)}</a></li>`
 		);
 
 		await writePage(`blog/${post.slug}/index.html`, {
@@ -141,8 +141,9 @@ async function build() {
 				title: escapeHtml(post.title),
 				date: post.date,
 				displayDate: formatDate(post.date),
-				tags: tagLinks.length
-					? `<p class="post-tags muted">Tagged ${tagLinks.join(', ')}</p>`
+				// The list has no visible label, so screen readers get "Tags".
+				tags: tagItems.length
+					? `<ul class="post-tags" aria-label="Tags">${tagItems.join('')}</ul>`
 					: '',
 				image: post.image
 					? `<img class="post-image pixel-border" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.imageAlt)}">`

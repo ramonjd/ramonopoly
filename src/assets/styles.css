@@ -647,6 +647,36 @@ a:hover {
 	font-size: clamp(36px, 5vw, 56px);
 }
 
+/* The post's tags, as small pills under the date. */
+.post-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* The 2px shadows notch the corners, like the buttons. */
+.post-tags a {
+	display: block;
+	padding: 2px 10px;
+	background: var(--surface-sunken);
+	box-shadow:
+		-2px 0 0 0 var(--surface-sunken),
+		2px 0 0 0 var(--surface-sunken),
+		0 -2px 0 0 var(--surface-sunken),
+		0 2px 0 0 var(--surface-sunken);
+	color: var(--text);
+	font-family: var(--pixel-font);
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.post-tags a:hover {
+	color: var(--accent);
+}
+
 /* The post's featured image, under the title and date, at its own shape. */
 .post-image {
 	display: block;
